@@ -13,14 +13,9 @@ import 'regenerator-runtime/runtime';
 import addrecipeView from './views/addRecipeView.js';
 ///////////////////////////////////////
 
-// if (module.hot) {
-//   module.hot.accept();
-// }
-
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
-    // console.log(id);
 
     if (!id) return;
 
@@ -51,7 +46,6 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     ///// 3) render results
-    // resultsView.render(model.state.search.results);
     resultsView.render(model.getSearchResultsPage());
 
     //// 4) render initial pagination
@@ -75,7 +69,6 @@ const controlServings = function (newServings) {
   ///// update the recipe servings (in the state)
 
   /// update recipe view
-  // recipeView.render(model.state.recipe);
   recipeView.update(model.state.recipe);
 };
 
@@ -95,7 +88,6 @@ const controlBookmarks = function () {
 };
 
 const controlAddRecipe = async function (newRecipe) {
-  // console.log(newRecipe);
   /// upload the new recipe data
   try {
     addrecipeView.renderSpinner();
@@ -110,7 +102,6 @@ const controlAddRecipe = async function (newRecipe) {
     bookmarksView.render(model.state.bookmarks);
     //// change id in url
     window.history.pushState(null, '', `#${model.state.recipe.id}`);
-
     ////close form window
     setTimeout(function () {
       addrecipeView.toggleWindow();
